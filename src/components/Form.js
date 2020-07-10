@@ -24,7 +24,7 @@ export default function Form() {
             return setError('Por favor ingrese un texto valido');
         }
 
-        const url = 'http://www.omdbapi.com/?apikey=770b0345';
+        const url = 'https://www.omdbapi.com/?apikey=770b0345';
         const res = await axios.get(`${url}&s=${title}`);
         const data = res.data;
         
@@ -83,7 +83,7 @@ export default function Form() {
                     {movie.map(movie => {
                         return <div className="col-md-4 my-2" key={movie.imdbID}>
                             <div className="card" onClick={ async () => {
-                                const url = 'http://www.omdbapi.com/?apikey=770b0345';
+                                const url = 'https://www.omdbapi.com/?apikey=770b0345';
                                 const res = await axios.get(`${url}&i=${movie.imdbID}`);
                                 const data = res.data;
                                 setMovie([]);
