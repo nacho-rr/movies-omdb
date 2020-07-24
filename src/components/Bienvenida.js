@@ -8,7 +8,7 @@ export default function Bienvenida() {
                     <div className="card-body text-center">
                         <h2 className="card-title">Bienvenidos a MOVIES APP</h2>
                         <p className="card-text">Una aplicación desarrollada para que puedas buscar tus peliculas y hacer una lista con tus favoritas.</p>
-                        <p><small>Solo tienes que ingresar con tu cuenta de Google</small></p>
+                        <p><small>Solo tienes que iniciar sesion con tu cuenta de Google</small></p>
                     </div>
                 </div>
             </div>

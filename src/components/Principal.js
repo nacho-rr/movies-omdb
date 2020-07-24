@@ -4,13 +4,24 @@ import Resultados from './Resultados';
 
 export default function Principal(props) {
 
-    const {texto, handle, buscar, error, movie, detalles, buscarDetalles, favorito, list, mensaje, borrar} = props;
+    const {texto,
+           handle,
+           buscar,
+           error,
+           movie,
+           detalles,
+           buscarDetalles,
+           favorito,
+           list,
+           mensaje,
+           borrar,
+           page} = props;
 
     return (
         <Fragment>
             <Buscador texto={texto} handle={handle} buscar={buscar} error={error} />
             <Resultados
-                movie={movie}
+                movies={movie}
                 detalles={detalles}
                 buscar={buscarDetalles}
                 favorito={favorito}
@@ -18,6 +29,7 @@ export default function Principal(props) {
                 list={list}
                 mensaje={mensaje}
                 borrar={borrar}
+                page={page}
             />
         </Fragment>
     )

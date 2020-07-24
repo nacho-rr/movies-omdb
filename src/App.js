@@ -20,6 +20,8 @@ export default function App() {
     const [user, setUser] = useState('');
     const [favoriteList, setFavoriteList] = useState([]);
     const [mensaje, setMensaje] = useState('');
+    const [pageNumber, setPageNumber] = useState(1);
+    const [lastText, setLastText] = useState('');
 
     //firebase
     const firebase = useFirebaseApp();
@@ -34,9 +36,29 @@ export default function App() {
         getData();
     }, [user])
 
+    useEffect(() => {
+        if(lastText){
+            scroll();
+        }
+    }, [pageNumber])
+
     //funciones
     const handleTyping = (e) => {
         setTexto(e);
+    }
+
+    const scroll = async () => {
+        const url = 'https://www.omdbapi.com/?apikey=770b0345';
+        const res = await axios.get(`${url}&s=${lastText}&page=${pageNumber}`);
+        const data = res.data;
+
+        if (data.Response === 'False'){
+            return
+        }else{
+            const newData = [...movie];
+            data.Search.map(peli => newData.push(peli));
+            setMovie(newData);
+        }
     }
 
     const buscar = async () => {
@@ -54,6 +76,7 @@ export default function App() {
         }
 
         setError('');
+        setLastText(texto)
         setTexto('');
         setDetalles('');
         setMovie(data.Search);
@@ -64,6 +87,7 @@ export default function App() {
         const res = await axios.get(`${url}&i=${dato}`);
         const data = res.data;
         setMovie([]);
+        setPageNumber(0);
         setDetalles(data);
     }
 
@@ -95,7 +119,7 @@ export default function App() {
                 setMensaje('')
             }, 3000);
         }else{
-            setError('Debe estar logeado para agregar a favoritos');
+            setError('Debes iniciar sesion para agregar a favoritos');
         }
     }
 
@@ -133,7 +157,7 @@ export default function App() {
                             user={user}
                             mensaje={mensaje}
                             borrar={deleteFavoritos}
-                            mensaje={mensaje}/> :
+                            /> :
                         <Redirect to='/login' />}
                 </Route>
                 <Route path='/' exact>
@@ -148,6 +172,7 @@ export default function App() {
                         list={favoriteList}
                         mensaje={mensaje}
                         borrar={deleteFavoritos}
+                        page={setPageNumber}
                         />
                 </Route>
             </Switch>

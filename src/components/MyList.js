@@ -10,7 +10,7 @@ export default function MyList(props) {
             <div className="container my-4">
                 <p className="container text-success">{mensaje}</p>
                 {list.length === 0 ?
-                    (<h4>No hay guardado en favorito</h4>):
+                    (<h4>No hay datos guardados en favoritos</h4>):
                         (list.map(dato => <Tabla dato={dato} key={dato.id} borrar={borrar}/>))}
             </div>
         </Fragment>
